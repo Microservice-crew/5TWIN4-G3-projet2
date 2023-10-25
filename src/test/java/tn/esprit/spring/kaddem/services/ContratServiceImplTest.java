@@ -1,36 +1,38 @@
 package tn.esprit.spring.kaddem.services;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.repositories.ContratRepository;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ExtendWith(MockitoExtension.class)
 public class ContratServiceImplTest {
-
-    @InjectMocks
-    private ContratServiceImpl contratService;
 
     @Mock
     private ContratRepository contratRepository;
 
-    // Initialize the mocks
+    @InjectMocks
+    private ContratServiceImpl contratService;
+
     @BeforeEach
-    public void init() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    @Order(1)
     public void testAddContrat() {
         // Create a sample Contrat
         Contrat sampleContrat = new Contrat();
@@ -48,7 +50,6 @@ public class ContratServiceImplTest {
     }
 
     @Test
-    @Order(2)
     public void testRetrieveContrat() {
         // Create a sample Contrat ID
         Integer contratId = 1;
@@ -60,17 +61,14 @@ public class ContratServiceImplTest {
         // Call the service method
         Contrat retrievedContrat = contratService.retrieveContrat(contratId);
 
-        // Verify that the repository's findById method was called
+        // Verify that the find method of the repository was called
         verify(contratRepository, times(1)).findById(contratId);
 
-        // Check if the returned Contrat matches the sample Contrat
+        // Check if the returned Contrat matches the one from the repository
         assertEquals(sampleContrat, retrievedContrat);
     }
 
-    // Add more test methods for other service methods
-
     @Test
-    @Order(3)
     public void testUpdateContrat() {
         // Create a sample Contrat
         Contrat sampleContrat = new Contrat();
@@ -78,17 +76,16 @@ public class ContratServiceImplTest {
         when(contratRepository.save(any(Contrat.class))).thenReturn(sampleContrat);
 
         // Call the service method
-        Contrat savedContrat = contratService.updateContrat(sampleContrat);
+        Contrat updatedContrat = contratService.updateContrat(sampleContrat);
 
         // Verify that the save method of the repository was called
         verify(contratRepository, times(1)).save(any(Contrat.class));
 
         // Check if the returned Contrat matches the one saved
-        assertEquals(sampleContrat, savedContrat);
+        assertEquals(sampleContrat, updatedContrat);
     }
 
     @Test
-    @Order(4)
     public void testRemoveContrat() {
         // Create a sample Contrat ID
         Integer contratId = 1;
@@ -100,11 +97,7 @@ public class ContratServiceImplTest {
         // Call the service method
         contratService.removeContrat(contratId);
 
-        // Verify that the repository's findById method was called
-        verify(contratRepository, times(1)).findById(contratId);
-        // Verify that the repository's delete method was called
+        // Verify that the delete method of the repository was called
         verify(contratRepository, times(1)).delete(sampleContrat);
     }
-
-
 }

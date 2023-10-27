@@ -74,7 +74,7 @@ ContratRepository contratRepository;
 	public void retrieveAndUpdateStatusContrat() {
 		List<Contrat> contrats = contratRepository.findAll();
 		List<Contrat> contrats15j = new ArrayList<>();
-		List<Contrat> contratsAarchiver = new ArrayList();
+		List<Contrat> contratsAarchiver = new ArrayList<>();
 
 		for (Contrat contrat : contrats) {
 			Date dateSysteme = new Date();

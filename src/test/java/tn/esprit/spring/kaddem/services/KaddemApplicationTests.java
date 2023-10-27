@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @ContextConfiguration(classes = {ContratServiceImpl.class})
 @ExtendWith(MockitoExtension.class)
 
-public class KaddemApplicationTests {
+ class KaddemApplicationTests {
     @Mock
     private ContratRepository contratRepository;
 

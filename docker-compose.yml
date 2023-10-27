@@ -9,7 +9,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=AbdelkaderDB
-      - MYSQL_USER=root
     volumes:
       - db_vol:/var/lib/mysqlg
 

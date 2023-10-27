@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 
+@SpringBootTest
 @ContextConfiguration(classes = {EquipeServiceImpl.class})
 @ExtendWith(MockitoExtension.class)
 

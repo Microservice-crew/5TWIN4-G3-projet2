@@ -11,7 +11,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=
     volumes:
-      - AbdelkaderDB:/var/lib/mysql
+      - AbdelkaderDB:/var/lib/mysqlg
 
   departement_app:
     build: ./

@@ -1,6 +1,6 @@
 package tn.esprit.spring.kaddem.services;
 
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.kaddem.entities.Departement;
@@ -13,10 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 @Service
-@Slf4j
+
 public class UniversiteServiceImpl implements IUniversiteService{
 @Autowired
     UniversiteRepository universiteRepository;

@@ -10,6 +10,7 @@ import tn.esprit.spring.kaddem.repositories.ContratRepository;
 import tn.esprit.spring.kaddem.repositories.DepartementRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 
@@ -18,6 +19,7 @@ public class DepartementServiceImpl implements IDepartementService{
 	@Autowired
 	DepartementRepository departementRepository;
 	public List<Departement> retrieveAllDepartements(){
+
 		return (List<Departement>) departementRepository.findAll();
 	}
 
@@ -29,9 +31,12 @@ public class DepartementServiceImpl implements IDepartementService{
 		return departementRepository.save(d);
 	}
 
-	public  Departement retrieveDepartement (Integer idDepart){
-		return departementRepository.findById(idDepart).get();
+	public Departement retrieveDepartement(Integer idDepart) {
+		Optional<Departement> departementOptional = departementRepository.findById(idDepart);
+
+        return departementOptional.orElse(null);
 	}
+
 	public  void deleteDepartement(Integer idDepartement){
 		Departement d=retrieveDepartement(idDepartement);
 		departementRepository.delete(d);

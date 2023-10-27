@@ -16,7 +16,7 @@ import tn.esprit.spring.kaddem.repositories.EtudiantRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -41,8 +41,10 @@ public class EtudiantServiceImpl implements IEtudiantService{
 		return etudiantRepository.save(e);
 	}
 
-	public Etudiant retrieveEtudiant(Integer  idEtudiant){
-		return etudiantRepository.findById(idEtudiant).get();
+	public Etudiant retrieveEtudiant(Integer idEtudiant) {
+		Optional<Etudiant> etudiantOptional = etudiantRepository.findById(idEtudiant);
+
+        return etudiantOptional.orElse(null);
 	}
 
 	public void removeEtudiant(Integer idEtudiant){
@@ -50,20 +52,38 @@ public class EtudiantServiceImpl implements IEtudiantService{
 	etudiantRepository.delete(e);
 	}
 
-	public void assignEtudiantToDepartement (Integer etudiantId, Integer departementId){
-        Etudiant etudiant = etudiantRepository.findById(etudiantId).orElse(null);
-        Departement departement = departementRepository.findById(departementId).orElse(null);
-        etudiant.setDepartement(departement);
-        etudiantRepository.save(etudiant);
+	public void assignEtudiantToDepartement(Integer etudiantId, Integer departementId) {
+
+
+		Etudiant etudiant = etudiantRepository.findById(etudiantId).orElse(null);
+		Departement departement = departementRepository.findById(departementId).orElse(null);
+
+		if (etudiant != null && departement != null) {
+			etudiant.setDepartement(departement);
+			etudiantRepository.save(etudiant);
+		} else {
+			log.error("Etudiant or Departement not found");
+		}
 	}
+
 	@Transactional
-	public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe){
-		Contrat c=contratRepository.findById(idContrat).orElse(null);
-		Equipe eq=equipeRepository.findById(idEquipe).orElse(null);
-		c.setEtudiant(e);
-		eq.getEtudiants().add(e);
-return e;
+	public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe) {
+
+
+		Contrat c = contratRepository.findById(idContrat).orElse(null);
+		Equipe eq = equipeRepository.findById(idEquipe).orElse(null);
+
+		if (c != null) {
+			c.setEtudiant(e);
+		}
+
+		if (eq != null) {
+			eq.getEtudiants().add(e);
+		}
+
+		return e;
 	}
+
 
 	public 	List<Etudiant> getEtudiantsByDepartement (Integer idDepartement){
 return  etudiantRepository.findEtudiantsByDepartement_IdDepart((idDepartement));

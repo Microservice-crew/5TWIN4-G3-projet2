@@ -58,7 +58,7 @@ public class EquipeServiceImpl implements IEquipeService{
 						long differenceEnTemps = dateSysteme.getTime() - contrat.getDateFinContrat().getTime();
 						long differenceEnAnnees = (differenceEnTemps / (1000L * 60 * 60 * 24 * 365));
 
-						if (contrat.getArchive() == false && differenceEnAnnees > 1) {
+						if (!contrat.getArchive() && differenceEnAnnees > 1) {
 							nbEtudiantsAvecContratsActifs++;
 							if (nbEtudiantsAvecContratsActifs >= 3) {
 								break;

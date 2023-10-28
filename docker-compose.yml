@@ -16,7 +16,7 @@ services:
 
   departement_app:
     build: ./
-    image: departement
+    image: abdelkaderbelhadj-5twin4-g3
     restart: unless-stopped
     ports:
       - 8089:8089

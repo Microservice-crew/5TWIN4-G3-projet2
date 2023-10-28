@@ -1,4 +1,4 @@
-FROM node:16.16.2 as builder
+FROM node:16.20.2 as builder
 
 WORKDIR /app
 
@@ -8,10 +8,8 @@ RUN npm uninstall -D angular-cli --legacy-peer-deps
 
 RUN npm install --force
 
-RUN npm run build --prod
-
 FROM nginx:latest
 
-COPY --from=builder /app/dist/Kaddem_Frontend /usr/share/nginx/html
+COPY --from=builder /app/dist/kaddem /usr/share/nginx/html
 
 EXPOSE 4200

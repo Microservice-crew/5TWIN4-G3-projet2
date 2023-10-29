@@ -1151,7 +1151,7 @@ class EquipeServicesService {
         this.urldetails = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.defaultUrl + '/kaddem/DetailEquipeC';
     }
     postEquipe(data) {
-        return this.http.post(`${this.url}/add`, data);
+        return this.http.post(`${this.url}/add-equipe`, data);
     }
     getEquipe() {
         return this.http.get(`${this.url}/all`);

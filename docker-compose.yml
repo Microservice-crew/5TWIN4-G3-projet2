@@ -1,4 +1,4 @@
-version: "2.2"
+version: "3"
 services:
   mysqldb:
     container_name: mysqldb
@@ -12,7 +12,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=AbdelkaderDB
     volumes:
-      - db_vol:/var/lib/mysqlg
+      - db_vol:/var/lib/mysqldb
+    networks:
+      - my_network
 
   departement_app:
     build: ./
@@ -22,7 +24,20 @@ services:
       - 8089:8089
     depends_on:
       - mysqldb
+    networks:
+      - my_network
 
+  front_app:
+    build: ./Kaddem_FrontEnd
+    image: front
+    restart: unless-stopped
+    ports:
+      - 4200:80
+    networks:
+      - my_network
+
+networks:
+  my_network:
 
 volumes:
-  db_vol: {}
+  db_vol:

@@ -21,7 +21,7 @@ export class EquipeServicesService {
 
 
 postEquipe(data : any){
-  return this.http.post<any>(`${this.url}/add`,data);
+  return this.http.post<any>(`${this.url}/add-equipe`,data);
 
 }
 

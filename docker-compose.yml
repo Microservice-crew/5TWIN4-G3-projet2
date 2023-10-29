@@ -1,0 +1,28 @@
+version: "2.2"
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_USER:root
+      - MYSQL_PASSWORD:root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ZiedDB
+    volumes:
+      - db_vol:/var/lib/mysqldb
+
+  departement_app:
+    build: ./
+    image: ziedmathlouthi-5twin4-g3
+    restart: unless-stopped
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+
+
+volumes:
+  db_vol: {}

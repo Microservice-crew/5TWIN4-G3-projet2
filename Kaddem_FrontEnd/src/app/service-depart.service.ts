@@ -6,11 +6,11 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ServiceDepartService {
-  urlApi = 'http://localhost:8189/kaddem/dep/all'; 
-  urlDel='http://localhost:8189/kaddem/dep/remove/' 
-  urlAdd='http://localhost:8189/kaddem/dep/add' 
-  urlGetId='http://localhost:8189/kaddem/dep/get/'
-  urlUpdate='http://localhost:8189/kaddem/dep/updateDepar' // URL de l'API
+  urlApi = 'http://localhost:8089/kaddem/departement/retrieve-all-departements';
+  urlDel='http://localhost:8089/kaddem/departement/remove-departement/'
+  urlAdd='http://localhost:8089/kaddem/departement/add-departement'
+  urlGetId='http://localhost:8089/kaddem/departement/retrieve-departement/'
+  urlUpdate='http://localhost:8089/kaddem/departement/update-departement'
   Departement=[];
   constructor(private http: HttpClient) { }
 
@@ -19,21 +19,21 @@ export class ServiceDepartService {
   getData():Observable<Departement[]> {
     return this.http.get<Departement[]>(this.urlApi);
 }
- 
+
 delete(id:number){
-   
+
   return  this.http.delete(this.urlDel+id)
       ;
 
-} 
- 
+}
+
 AddDepart(Departement: Departement):Observable<Departement>{
  return this.http.post<Departement>(this.urlAdd,Departement)
 }
 UpdateDepart(id:number, d: Departement){
-  
+
  return this.http.put<Departement>(this.urlUpdate,d);
- 
+
 }
 getDepartById(id:Number){
   return this.http.get<Departement>(this.urlGetId+id);

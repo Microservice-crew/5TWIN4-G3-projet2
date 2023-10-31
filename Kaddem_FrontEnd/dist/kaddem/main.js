@@ -3511,11 +3511,11 @@ __webpack_require__.r(__webpack_exports__);
 class ServiceDepartService {
     constructor(http) {
         this.http = http;
-        this.urlApi = 'http://localhost:8189/kaddem/dep/all';
-        this.urlDel = 'http://localhost:8189/kaddem/dep/remove/';
-        this.urlAdd = 'http://localhost:8189/kaddem/dep/add';
-        this.urlGetId = 'http://localhost:8189/kaddem/dep/get/';
-        this.urlUpdate = 'http://localhost:8189/kaddem/dep/updateDepar'; // URL de l'API
+        this.urlApi = 'http://localhost:8089/kaddem/departement/retrieve-all-departements';
+        this.urlDel = 'http://localhost:8089/kaddem/departement/remove-departement/';
+        this.urlAdd = 'http://localhost:8089/kaddem/departement/add-departement';
+        this.urlGetId = 'http://localhost:8089/kaddem/departement/retrieve-departement/';
+        this.urlUpdate = 'http://localhost:8089/kaddem/departement/update-departement';
         this.Departement = [];
     }
     getData() {

@@ -9,13 +9,11 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=root
       - MARIADB_DATABASE=kaddem
-    networks:
-      - my_network
+
 
 
 
   kaddem_app:
-    build: ./
     image: arijhajji-5twin4-g3-kaddem:70
     restart: unless-stopped
     environment:
@@ -26,8 +24,7 @@ services:
       - 8089:8089
     depends_on:
       - mysqldb
-    networks:
-      - my_network
+
 
 
 

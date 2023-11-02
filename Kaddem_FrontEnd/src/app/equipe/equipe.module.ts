@@ -17,12 +17,12 @@ import { EquipeServicesService } from './services/equipe-services.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
-import { DetailsEquipeComponent } from './details-equipe/details-equipe.component'
 
 import { HttpService } from './services/http.service';
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { UpdateEquipeComponent } from './update-equipe/update-equipe.component';
 
 
 
@@ -35,7 +35,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
   declarations: [
     ListEquipeComponent,
     DialogEquipeComponent,
-    DetailsEquipeComponent
+    UpdateEquipeComponent,
   ],
   imports: [
     CommonModule,
@@ -56,7 +56,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     NgxQRCodeModule
 
 
-    
+
   ],
   providers: [EquipeServicesService,HttpService],
 

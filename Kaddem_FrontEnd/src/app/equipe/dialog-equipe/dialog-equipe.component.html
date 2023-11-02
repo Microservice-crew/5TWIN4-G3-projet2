@@ -44,56 +44,6 @@
 
     </mat-radio-group>
 
-    
-    <mat-form-field appearance="outline">
-        <mat-label>Nombre maximum des membres</mat-label>
-        <input type="number"    formControlName="nbrDesMembresMax" matInput  placeholder="Nombre maximum" >
-
-        <mat-error *ngIf="equipeForm.controls['nbrDesMembresMax'].touched && equipeForm.controls['nbrDesMembresMax'].hasError('required') ">
-            nbr Membres Max est <strong> requis</strong>
-       </mat-error>
-
-       <mat-error *ngIf="equipeForm.controls['nbrDesMembresMax'].touched && equipeForm.controls['nbrDesMembresMax'].hasError('max') ">
-        n° salle ne doit pas dépacer <strong>20</strong>
-    </mat-error>
-
-       <mat-error *ngIf="equipeForm.controls['nbrDesMembresMax'].touched && equipeForm.controls['nbrDesMembresMax'].hasError('min') ">
-        n° salle ne doit pas etre inf a <strong>2</strong>
-    </mat-error>
-
-        <mat-error *ngIf="equipeForm.controls['nbrDesMembresMax'].touched && equipeForm.controls['nbrDesMembresMax'].hasError('pattern') ">
-            n° salle doit etre <strong>numerique</strong>
-        </mat-error>
-
-       
-
-
-
-
-
-    </mat-form-field>
-
-
-    <mat-form-field appearance="outline">
-        <mat-label>Email equipe</mat-label>
-        <input  formControlName="mail" matInput placeholder="pat@example.com">
-        <mat-error *ngIf="equipeForm.controls['mail'].touched && equipeForm.controls['mail'].hasError('required') ">
-            Email est <strong> requis</strong>
-       </mat-error>
-
-       <mat-error *ngIf="equipeForm.controls['mail'].touched && equipeForm.controls['mail'].hasError('email') ">
-        Email doit etre sous cette format<strong> oussama.ghannay@exemple.com </strong>
-   </mat-error>
-      </mat-form-field>
-
-
-      
-        <mat-label>Logo equipe</mat-label>
-        <input type="file"  formControlName="logo"   placeholder="Logo" >
-
-
-        
-   
 
 
      <div mat-dialog-actions [align]="'end'">
@@ -101,15 +51,15 @@
         <button style="margin-right: 5px;" mat-raised-button color="warn" mat-dialog-close>Annuler</button>
 
         <button mat-raised-button color="primary"   [disabled]="!equipeForm.valid" (click)="addEquipe()"
-        
+
         >{{actionButton}}</button>
-  
+
 
      </div>
 
 
 
-     
+
 
 
 
@@ -122,17 +72,17 @@
 
 
 
-    
 
 
 
-   
-  
+
+
+
 </div>
 
 
 
- 
+
 
 
 

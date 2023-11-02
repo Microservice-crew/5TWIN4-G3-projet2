@@ -36,9 +36,11 @@ export class ListEquipeComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['detail','logo','nomEquipe','mail','niveau','nbrDesMembresMax','actions'];
+  displayedColumns: string[] = ['nomEquipe','niveau','actions'];
   dataSource!: MatTableDataSource<any>;
-  
+  list:any[]=[]
+
+
   ////
   haveDetails!:number;
 
@@ -58,7 +60,7 @@ export class ListEquipeComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogEquipeComponent, {
         width:'30%'
-      
+
     }).afterClosed().subscribe(val=>{
       if(val==='ajout'){
         this.getAllEquipes()
@@ -69,10 +71,10 @@ export class ListEquipeComponent implements OnInit {
   ngOnInit(): void {
     this.getAllEquipes()
     console.log(this.getAllEquipes())
-    
 
 
-    
+
+
   }
 
 
@@ -86,17 +88,17 @@ export class ListEquipeComponent implements OnInit {
       next: (data:Equipe[])=>{
         this.equipes=data
 
-   
+
         console.log("heeeelooo liste equipe");
 
         console.log(data);
         this.dataSource=new MatTableDataSource(data)
-        
-      
+
+
 
         this.dataSource.paginator=this.paginator
         this.dataSource.sort=this.sort
-       
+
       },
       error:()=>{
         alert("erreur get all")
@@ -104,7 +106,7 @@ export class ListEquipeComponent implements OnInit {
 
 
     })
-  
+
 
 
   }
@@ -125,7 +127,7 @@ export class ListEquipeComponent implements OnInit {
     this.dialog.open(DialogEquipeComponent, {
         width:'30%',
         data:row
-      
+
     }).afterClosed().subscribe(val=>{
       if(val==='update'){
         this.getAllEquipes()
@@ -152,7 +154,7 @@ export class ListEquipeComponent implements OnInit {
 
 
     })
-     
+
   }
 
 
@@ -162,14 +164,14 @@ export class ListEquipeComponent implements OnInit {
     /* pass here the table id */
     let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
+
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Liste des Equipes');
- 
-    /* save to file */  
+
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
- 
+
   }
 
 
@@ -179,30 +181,30 @@ export class ListEquipeComponent implements OnInit {
 
 
 
-  
+
   public openPDF():void {
     let DATA = document.getElementById('excel-table');
- 
+
     html2canvas(DATA!).then(canvas => {
-        
+
         let fileWidth = 208;
         let fileHeight = canvas.height * fileWidth / canvas.width;
-        
+
         const FILEURI = canvas.toDataURL('C:/Users/MSI/Desktop/MINI PROJET')
-        
+
         let PDF = new jsPDF('p', 'mm', 'a4');
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        
+
         PDF.save('angular-demo.pdf');
-    });     
+    });
     }
 
 
 
 
 
-    
+
 
 }
 

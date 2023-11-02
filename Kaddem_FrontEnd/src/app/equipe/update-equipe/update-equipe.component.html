@@ -1,0 +1,23 @@
+<form [formGroup]="reactiveForm">
+  <div class="card-body">
+    <h4 class="card-title">Equipe Details</h4>
+    <div class="mt-4">
+      <div class="form-group">
+        <label for="nomEquipe">Nom Equipe</label>
+        <input type="text" formControlName="nomEquipe" class="form-control" id="nomEquipe">
+      </div>
+      <div class="alert alert-danger" id="updateField" *ngIf="nomEquipe?.hasError('required') && nomEquipe?.touched">Nom Equipe is required</div>
+    </div>
+    <div class="mt-4">
+      <div class="form-group">
+        <label for="niveau">Niveau</label>
+        <select formControlName="niveau" class="form-control" id="niveau">
+          <option value="JUNIOR">JUNIOR</option>
+          <option value="SENIOR">SENIOR</option>
+          <option value="EXPERT">EXPERT</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="update()">Update Equipe</button>
+</form>

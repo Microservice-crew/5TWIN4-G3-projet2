@@ -12,8 +12,6 @@ export class EquipeServicesService {
 
   public url= environment.defaultUrl+'/kaddem/equipe'
 
-  public urldetails= environment.defaultUrl+'/kaddem/DetailEquipeC'
-
 
 
   constructor(private http :HttpClient) { }
@@ -21,14 +19,14 @@ export class EquipeServicesService {
 
 
 postEquipe(data : any){
-  return this.http.post<any>(`${this.url}/add`,data);
+  return this.http.post<any>(`${this.url}/add-equipe`,data);
 
 }
 
 
 
 getEquipe(){
-  return this.http.get<any>(`${this.url}/all`);
+  return this.http.get<any>(`${this.url}/retrieve-all-equipes`);
 
 }
 
@@ -37,7 +35,7 @@ getEquipe(){
 
 
 getEquipeById(idequipe:any){
-  return this.http.get<any>(`${this.url}/getequipe/${idequipe}`);
+  return this.http.get<any>(`${this.url}/retrieve-equipe/${idequipe}`);
 
 }
 
@@ -45,14 +43,14 @@ getEquipeById(idequipe:any){
 
 
 
-updateEquipe(data:any,id:number){
+updateEquipe(idDepart: number ,data:any){
 
-return this.http.put<any>(`${this.url}/updateById/${id}`,data)
+return this.http.put<any>(`${this.url}/update-equipe`,data)
 }
 
 
 deleteEquipe(id:number){
-  return this.http.delete<any>(`${this.url}/deleteEquipe/${id}`)
+  return this.http.delete<any>(`${this.url}/remove-equipe/${id}`)
 }
 
 
@@ -64,66 +62,6 @@ addDetailsToEquipe(details:any,idEquipe:number) {
   return this.http.put(`${this.url}/addDetails/${idEquipe}`,details)
 }
 
-
-
-
-//--------------------------details equipe---------------------------
-
-
-
-deleteDetailsEquipe(iddetails:number){
-  return this.http.delete<any>(`${this.urldetails}/deleteDetailEquipe/${iddetails}`)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--------------------------details equipe---------JSON------------------
-
-
-getDetailsEquipeById(idDetails:any){
-
-  return this.http.get<any>("http://localhost:3000/DetailsEquipe/"+idDetails);
-
-
-
-}
-
-getDetalsEquipeByIdEquipe(ideq:any){
-  return this.http.get<any>("http://localhost:3000/DetailsEquipe?idequipe="+ideq)
-}
-
-
-
-getDetalsEquipeBysalle(){
-  return this.http.get<any>("http://localhost:3000/DetailsEquipe?salle=aa")
-}
-
-}

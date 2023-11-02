@@ -1,28 +1,46 @@
-version: "2.2"
+version: "3"
 services:
   mysqldb:
     container_name: mysqldb
-    image: mysql:latest
+    image: "mariadb:latest"
     restart: unless-stopped
     ports:
       - 3306:3306
     environment:
-      - MYSQL_USER:root
-      - MYSQL_PASSWORD:root
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=ZiedDB
-    volumes:
-      - db_vol:/var/lib/mysqldb
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=ZiedDB
+    networks:
+      - my_network
 
-  departement_app:
+
+
+  equipe_app:
     build: ./
-    image: ziedmathlouthi-5twin4-g3
+    image: ziedmathlouthi-g3-5twin4
     restart: unless-stopped
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/ZiedDB?autoReconnect=true&useSSL=false
+      - spring.datasource.username=root
+      - spring.datasource.password=root
     ports:
       - 8089:8089
     depends_on:
       - mysqldb
+    networks:
+      - my_network
+
+  front_app:
+    build: ./Kaddem_FrontEnd
+    image: frontend
+    restart: unless-stopped
+    ports:
+      - 4200:80
+    networks:
+      - my_network
 
 
 volumes:
-  db_vol: {}
+  db_vol:
+
+networks:
+  my_network:

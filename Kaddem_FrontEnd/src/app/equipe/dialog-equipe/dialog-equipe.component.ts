@@ -20,6 +20,7 @@ export class DialogEquipeComponent implements OnInit {
 
    equipeForm !: FormGroup
    actionButton:string="Ajouter"
+  updatedEquipe!: Equipe;
 
   constructor(private formBuilder : FormBuilder , private equipeService:EquipeServicesService,
               @Inject(MAT_DIALOG_DATA) public editdata:any,
@@ -46,41 +47,17 @@ export class DialogEquipeComponent implements OnInit {
 
       niveau :['',Validators.required ],
 
-      nbrDesMembresMax :['',[Validators.required,
-                             Validators.max(20),
-                             Validators.min(2),
-                             Validators.pattern("^[0-9]*$")] ],
 
-
-
-      mail :['',[Validators.required,
-                 Validators.email
-                                
-           ] ],
-
-
-
-
-
-
-      logo :['',Validators.required ],
-
-
-
-  
 
     })
 
 
     console.log(this.editdata)
-    
+
     if(this.editdata){
       this.actionButton="Modifier"
       this.equipeForm.controls['nomEquipe'].setValue(this.editdata.nomEquipe)
       this.equipeForm.controls['niveau'].setValue(this.editdata.niveau)
-      this.equipeForm.controls['nbrDesMembresMax'].setValue(this.editdata.nbrDesMembresMax)
-      this.equipeForm.controls['mail'].setValue(this.editdata.mail)
-      this.equipeForm.controls['logo'].setValue(this.editdata.logo)
     }
 
 
@@ -90,94 +67,21 @@ export class DialogEquipeComponent implements OnInit {
 
 
 
-  addEquipe(){
-
-    console.log(this.equipeForm.value)
-
-    if(!this.editdata){
-      if(this.equipeForm.valid){
-
-
-       console.log("ggggg"+this.equipeForm.controls['mail'].value);
-
-
-       // this.equipeForm..="fffffffff";
-
-
-
-      // this.equipeForm.controls['logo'].value="ddddddd";
-
-     // this.equipeForm.controls['logo'].setValue("kkkkkkkkkkk")
-
-
+  addEquipe() {
+    console.log(this.equipeForm.value);
         this.equipeService.postEquipe(this.equipeForm.value)
-        .subscribe({
-          next: (res)=>{
-            alert("equipe ajoute avec succes");
-            this.matdialoRef.close("ajout");
-
-
-/*--------------------send email--------------------------*/
-let maile=this.equipeForm.controls['mail'].value;
-console.log(">>>>>>>> "+maile);
-
-
- let user = {
-  name: "bbbbb",
-  email: this.equipeForm.controls['mail'].value,
-  sujet: "Bienvnu , Une equipe ete crée par cette email",
-  html : "Bienvnu , Une equipe ete crée par cette email"
-}
-this.http.sendEmail("http://localhost:3000/sendmail", user).subscribe(
-  data => {
-    let res:any = data; 
-    console.log(
-      `👏 > 👏 > 👏 > 👏 ${user.name} is successfully register and mail has been sent and the message id is ${res.messageId}`
-    );
-  },
-
-);
-
- /*-----------------//---send email--------------------------*/
-      this.equipeForm.reset();
-
-
-
-   
-
-          },
-          error:()=>{
-            alert("erreur d'ajout")
-          }
-  
-  
-        })
-      }
-    }else{
-      this.updateEquipe()
-    }
+          .subscribe({
+            next: (res) => {
+              alert("Team added successfully");
+              this.matdialoRef.close("add");
+            }
+          });
 
   }
 
 
-  updateEquipe(){
-
-    this.equipeService.updateEquipe(this.equipeForm.value,this.editdata.idEquipe)
-    .subscribe({
-      next:(r)=>{
-        alert("equipe bien modifiée")
-        this.equipeForm.reset()
-        this.matdialoRef.close('update')
-      },
-      error:()=>{
-        alert("error de modification")
-      }
-    })
 
 
-
-
-  }
 
 
 

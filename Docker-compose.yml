@@ -16,7 +16,7 @@ services:
 
   equipe_app:
     build: ./
-    image: arijhajji-5TWIN4-G3-kaddem
+    image: arijhajji-5TWIN4-G3-kaddem:69
     restart: unless-stopped
     environment:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/kaddem?autoReconnect=true&useSSL=false

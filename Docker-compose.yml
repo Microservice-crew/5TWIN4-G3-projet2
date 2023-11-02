@@ -14,7 +14,7 @@ services:
 
 
 
-  equipe_app:
+  kaddem_app:
     build: ./
     image: arijhajji-5twin4-g3-kaddem:70
     restart: unless-stopped

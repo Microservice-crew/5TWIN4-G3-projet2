@@ -19,7 +19,7 @@ services:
     environment:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/kaddem?autoReconnect=true&useSSL=false
       - spring.datasource.username=root
-      - spring.datasource.password=root
+      - spring.datasource.password=
     ports:
       - 8089:8089
     depends_on:

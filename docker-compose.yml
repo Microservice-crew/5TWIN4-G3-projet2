@@ -14,7 +14,7 @@ services:
       - db_vol:/var/lib/mysqldb
 
   contrat_app:
-    image: arijhajji/arijhajji-5twin4-g3-kaddem:82
+    image: arijhajji/arijhajji-5twin4-g3-kaddem:${IMAGE_TAG}
     container_name: contrat_app
     restart: unless-stopped
     ports:

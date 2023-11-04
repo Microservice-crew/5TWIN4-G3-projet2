@@ -12,11 +12,9 @@ services:
 
     volumes:
       - db_vol:/var/lib/mysqldb
-    networks:
-      - my_network
 
   contrat_app:
-    image: arijhajji/arijhajji-5twin4-g3-kaddem:${IMAGE_TAG}
+    image: arijhajji/arijhajji-5twin4-g3-kaddem:82
     container_name: contrat_app
     restart: unless-stopped
     ports:
@@ -28,12 +26,10 @@ services:
 
     depends_on:
       - mysqldb
-    networks:
-      - my_network
-
-
-networks:
-  my_network:
+    stdin_open: true
+    tty: true
+    volumes:
+      - .m2:/root/.m2
 
 volumes:
   db_vol:

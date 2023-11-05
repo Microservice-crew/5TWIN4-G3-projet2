@@ -11,7 +11,7 @@ services:
       - MYSQL_DATABASE=kaddem
 
     volumes:
-      - db_vol:/var/lib/mysqldb
+      - db:/var/lib/mysqldb
 
   contrat_app:
     image: arijhajji/arijhajji-5twin4-g3-kaddem:${IMAGE_TAG}
@@ -31,5 +31,48 @@ services:
     volumes:
       - .m2:/root/.m2
 
+
+  cadvisor:
+    container_name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "9091:8080"
+    volumes:
+      - "/:/rootfs"
+      - "/var/run:/var/run"
+      - "/sys:/sys"
+      - "/var/lib/docker/:/var/lib/docker"
+      - "/dev/disk/:/dev/disk"
+    privileged: true
+    devices:
+      - "/dev/kmsg"
+
+  prometheus:
+      container_name: prometheus
+      image: prom/prometheus:latest
+      ports: - "9090:9090"
+      volumes:
+        - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+      privileged: true
+      depends_on:
+        - cadvisor
+
+  grafana:
+      container_name: grafana
+      image: grafana/grafana:latest
+      ports:
+        - "3000:3000"
+      environment:
+        - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+        - DS_PROMETHEUS=prometheus
+      volumes:
+        - "grafana-data:/var/lib/grafana"
+        - "./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml"
+        - "./:/var/lib/grafana/dashboards"
+        - "./default.yaml:/etc/grafana/provisioning/dashboards/default.yaml"
+      privileged: true
+      depends_on:
+        - prometheus
 volumes:
-  db_vol:
+  db:
+  grafana-data:

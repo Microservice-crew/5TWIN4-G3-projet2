@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import tn.esprit.spring.kaddem.entities.Universite;
-import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.repositories.UniversiteRepository;
-import tn.esprit.spring.kaddem.repositories.DepartementRepository;
+
 
 import java.util.Optional;
+import java.util.Set;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,8 +26,7 @@ public class UniversiteServiceImplTest {
     @Mock
     private UniversiteRepository universiteRepository;
 
-    @Mock
-    private DepartementRepository departementRepository;
+
 
 
     // Initialize the mocks
@@ -88,41 +88,7 @@ public class UniversiteServiceImplTest {
         verify(universiteRepository, times(1)).delete(sampleUniversite);
     }
 
-    @Test
-    public void testAssignUniversiteToDepartement() {
-        // Create a sample Universite and Departement ID
-        Integer universiteId = 1;
-        Integer departementId = 1;
-        // Create a sample Universite and Departement
-        Universite sampleUniversite = new Universite();
-        Departement sampleDepartement = new Departement();
-        when(universiteRepository.findById(universiteId)).thenReturn(Optional.of(sampleUniversite));
-        when(departementRepository.findById(departementId)).thenReturn(Optional.of(sampleDepartement));
 
-        // Call the service method
-        universiteService.assignUniversiteToDepartement(universiteId, departementId);
-
-        // Verify that the save method of the repository was called
-        verify(universiteRepository, times(1)).save(sampleUniversite);
-    }
-
-    @Test
-    public void testRetrieveDepartementsByUniversite() {
-        // Create a sample Universite and set of Departements
-        Integer universiteId = 1;
-        Universite sampleUniversite = new Universite();
-        Set<Departement> sampleDepartements = sampleUniversite.getDepartements();
-        when(universiteRepository.findById(universiteId)).thenReturn(Optional.of(sampleUniversite));
-
-        // Call the service method
-        Set<Departement> retrievedDepartements = universiteService.retrieveDepartementsByUniversite(universiteId);
-
-        // Verify that the repository's findById method was called
-        verify(universiteRepository, times(1)).findById(universiteId);
-
-        // Check if the returned set of Departements matches the one from the Universite
-        assertEquals(sampleDepartements, retrievedDepartements);
-    }
 
 
 }

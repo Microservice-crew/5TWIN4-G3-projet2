@@ -31,12 +31,14 @@ services:
     volumes:
       - .m2:/root/.m2
 
-  front_app:
-   build: ./Kaddem_FrontEnd
-   image: front
-   restart: unless-stopped
-   ports:
-     - 4200:80
+  front:
+    container_name: frontend
+    image: devops-front-front:latest
+    ports:
+      - 4200:80
+    command: [ "npm", "start" ]
+    depends_on:
+      - contrat_app
 
   cadvisor:
     container_name: cadvisor

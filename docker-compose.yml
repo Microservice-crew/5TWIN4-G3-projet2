@@ -33,7 +33,7 @@ services:
 
   front:
     container_name: frontend
-    image: devops-front-front:latest
+    image: arijhajji/arijhajji-5twin4-g3-kaddemFront:${IMAGE_TAG}
     ports:
       - 4200:80
     command: [ "npm", "start" ]

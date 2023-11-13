@@ -35,7 +35,7 @@ services:
     container_name: frontend
     image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}
     ports:
-      - 4200:80
+      - 80:4200
     command: [ "npm", "start" ]
     depends_on:
       - contrat_app

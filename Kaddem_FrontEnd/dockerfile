@@ -3,7 +3,7 @@ FROM node:16.15 AS builder
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 RUN npm install
 # Copy the rest of your application code
@@ -18,6 +18,6 @@ FROM nginx:alpine
 # Copy the Nginx configuration
 COPY src/ngnix/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=builder /app/dist/kaddem /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/kaddem /usr/share/nginx/html
 # Copy the build artifacts from the builder stage
 #COPY --from=builder app/dist/summer-workshop-angular /usr/share/nginx/html

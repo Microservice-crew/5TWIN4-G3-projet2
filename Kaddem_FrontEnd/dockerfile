@@ -10,7 +10,7 @@ RUN npm config rm https-proxy
 RUN npm config rm proxy
 
 # Configurer le registre npm avec un miroir différent (si nécessaire)
-npm config set registry http://registry.npmjs.org/
+RUN npm config set registry http://registry.npmjs.org/
 
 
 # Installer les dépendances

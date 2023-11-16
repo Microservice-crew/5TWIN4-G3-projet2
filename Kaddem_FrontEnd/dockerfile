@@ -1,34 +1,15 @@
-# Stage 1: Construire l'application Angular
-FROM node:16.15 AS builder
+FROM node:16.20.2 as builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY . /app
 
-# Réinitialiser les configurations de proxy npm
-RUN npm config rm https-proxy
-RUN npm config rm proxy
+RUN npm uninstall -D angular-cli --legacy-peer-deps
 
-# Configurer le registre npm avec un miroir différent (si nécessaire)
-RUN npm config set registry http://registry.npmjs.org/
+RUN npm install --force
 
+FROM nginx:latest
 
-# Installer les dépendances
-RUN npm install
+COPY --from=builder /app/dist/kaddem /usr/share/nginx/html
 
-# Copier le reste du code de votre application
-COPY . .
-
-# Construire l'application Angular
-RUN npm run build --prod
-
-CMD ["npm", "start"]
-
-# Stage 2: Créer l'image Nginx pour servir l'application construite
-FROM nginx:alpine
-
-# Copier la configuration Nginx
-COPY src/ngnix/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
-
-# Copier les artefacts de construction depuis l'étape de construction
-COPY --from=builder /usr/src/app/dist/kaddem /usr/share/nginx/html
+EXPOSE 4200

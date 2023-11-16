@@ -41,6 +41,12 @@ services:
     command: [ "npm", "start" ]
     depends_on:
       - contrat_app
+  nginx:
+    container_name: nginx
+    image: arijhajji/ngnix:${IMAGE_TAG}
+    ports:
+      - "8088:80"
+    command: [ "nginx", "-g", "daemon off;" ]
 
   cadvisor:
     container_name: cadvisor

@@ -106,24 +106,28 @@ ContratRepository contratRepository;
 		float chiffreAffaireEntreDeuxDates = 0;
 
 		for (Contrat contrat : contrats) {
-			Specialite specialite = contrat.getSpecialite();
-			float taux = 0;
-
-			if (specialite == Specialite.IA) {
-				taux = 300;
-			} else if (specialite == Specialite.CLOUD) {
-				taux = 400;
-			} else if (specialite == Specialite.RESEAUX) {
-				taux = 350;
-			} else if (specialite == Specialite.SECURITE) {
-				taux = 450;
-			}
-
+			float taux = getTauxBySpecialite(contrat.getSpecialite());
 			chiffreAffaireEntreDeuxDates += (differenceEnMois * taux);
 		}
 
 		return chiffreAffaireEntreDeuxDates;
 	}
+
+	float getTauxBySpecialite(Specialite specialite) {
+		switch (specialite) {
+			case IA:
+				return 300;
+			case CLOUD:
+				return 400;
+			case RESEAUX:
+				return 350;
+			case SECURITE:
+				return 450;
+			default:
+				throw new IllegalArgumentException("Specialité inconnue : " + specialite);
+		}
+		}
+
 
 
 

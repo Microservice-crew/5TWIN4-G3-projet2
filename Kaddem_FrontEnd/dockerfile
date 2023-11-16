@@ -1,3 +1,4 @@
+# Stage 1: Construire l'application Angular
 FROM node:16.20.2 as builder
 
 WORKDIR /app
@@ -8,7 +9,8 @@ RUN npm uninstall -D angular-cli --legacy-peer-deps
 
 RUN npm install --force
 
-FROM nginx:latest
+# Stage 2: Créer l'image Nginx pour servir l'application construite
+FROM docker.io/nginx:latest
 
 COPY --from=builder /app/dist/kaddem /usr/share/nginx/html
 

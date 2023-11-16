@@ -43,7 +43,7 @@ services:
       - contrat_app
   nginx:
     container_name: nginx
-    image: arijhajji/ngnix:${IMAGE_TAG}
+    image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}
     ports:
       - "8088:80"
     command: [ "nginx", "-g", "daemon off;" ]

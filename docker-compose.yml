@@ -43,6 +43,10 @@ services:
     command: [ "npm", "start" ]
     depends_on:
       - contrat_app
+    environment:
+      - no_proxy=127.0.0.1,localhost
+      - npm_config_proxy=
+      - npm_config_https_proxy=
   nginx:
     container_name: nginx
     image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}

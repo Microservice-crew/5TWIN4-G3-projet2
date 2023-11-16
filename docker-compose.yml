@@ -36,6 +36,8 @@ services:
     image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}
     ports:
       - 4200:80
+    volumes:
+      - './:/usr/src/app'
     command: [ "npm", "start" ]
     depends_on:
       - contrat_app

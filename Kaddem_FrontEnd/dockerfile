@@ -3,7 +3,7 @@ FROM node:16.20.2 as builder
 
 WORKDIR /app
 
-COPY . /app
+COPY . .
 
 RUN npm uninstall -D angular-cli --legacy-peer-deps
 

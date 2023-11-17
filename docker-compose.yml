@@ -31,26 +31,7 @@ services:
     volumes:
       - .m2:/root/.m2
 
-  front:
-    container_name: frontend
-    build:
-      context: ./Kaddem_FrontEnd
-    image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}
-    ports:
-      - 4200:80
-    volumes:
-      - './:/usr/src/app'
-    command: [ "npm", "start" ]
-    depends_on:
-      - contrat_app
 
-
-  nginx:
-    container_name: nginx
-    image: arijhajji/arijhajji-5twin4-g3-kaddemfront:${IMAGE_TAG}
-    ports:
-      - "8088:80"
-    command: [ "nginx", "-g", "daemon off;" ]
 
   cadvisor:
     container_name: cadvisor

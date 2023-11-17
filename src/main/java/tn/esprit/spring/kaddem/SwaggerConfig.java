@@ -31,7 +31,7 @@ public class SwaggerConfig {
     public GroupedOpenApi productPublicApi() {
         return GroupedOpenApi.builder()
                 .group("public-api")
-                .pathsToMatch( "/contrat/**")
+                .pathsToMatch("/**/**")
                 .pathsToExclude("**")
                 .build();
     }

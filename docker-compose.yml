@@ -38,6 +38,5 @@ services:
 
 networks:
   my_network:
-
 volumes:
   db_vol:

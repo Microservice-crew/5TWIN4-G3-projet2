@@ -1,4 +1,4 @@
-package tn.esprit.spring.kaddem.config;
+package tn.esprit.spring.kaddem;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
